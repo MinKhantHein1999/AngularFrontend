@@ -22,7 +22,7 @@
         <a class="nav-link" routerLink = "user/register">Register</a>
       </li>
       <li class="nav-item" *ngIf="userService.LoggedIn()">
-        <a class="nav-link" (click)="userService.LogOut()">Logout</a>
+        <a class="nav-link" (click)="userService.LogOut()" style="cursor: pointer;">Logout</a>
       </li>
     </ul>
   </div>
