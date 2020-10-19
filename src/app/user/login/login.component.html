@@ -1,0 +1,39 @@
+<div class="container my-2">
+  <h1 class="page-header"> Login Page</h1><hr>
+
+<form class="form mt-4" [formGroup]="loginForm" (ngSubmit) = "loginSubmit()">
+
+  <div class="form-group  show-hide-message">
+    <div [ngClass] = "messageClass">
+      {{message}}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input
+    type="email" class="form-control" id="email" placeholder="*Email" formControlName = "email" required/>
+    <div *ngIf="(Email.invalid && Email.touched) || Email.dirty">
+    	<small *ngIf="Email.errors?.required" class="text-danger">*Email is required</small>
+    	<!--question mark(?) is a safe navigation operator-->
+    	<small *ngIf="Email.errors?.pattern" class="text-danger">*Please provide a valid email address</small>
+  	</div>
+  </div>
+
+
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password" placeholder="*Password" formControlName = "password"  required/>
+
+    <div *ngIf="(Password.invalid && Password.touched) || Password.dirty">
+    	<small *ngIf="Password.errors?.required" class="text-danger">*Password is required</small>
+    	<!--question mark(?) is a safe navigation operator-->
+    	<small *ngIf="Password.errors?.minlength" class="text-danger">*Password must be at least 6 character.</small>
+  	</div>
+  </div>
+
+  <button type="submit" class="btn btn-primary float-right" [disabled]="!loginForm.valid">Login</button>
+
+</form>
+
+</div>

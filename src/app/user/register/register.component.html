@@ -1,0 +1,59 @@
+<div class="container my-2">
+  <h1 class="page-header"> Register Page</h1><hr>
+<form class="form mt-4" [formGroup]="registerForm" (ngSubmit) = "userRegister()">
+
+  <div class="form-group  show-hide-message">
+    <div [ngClass] = "messageClass">
+      {{message}}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="name">Username</label>
+    <input type="name" class="form-control" id="name" placeholder="*Username" formControlName = "name" required/>
+    <div *ngIf="(Username.invalid && Username.touched) || Username.dirty">
+      <small *ngIf="Username.errors?.required" class="text-danger">*Username is required</small>
+      <!--question mark(?) is a safe navigation operator-->
+    	<small *ngIf="Username.errors?.minlength || Username.errors?.maxlength" class="text-danger ">*Username must between 5 and 30 characters.</small>
+  	</div>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input
+    type="email" class="form-control" id="email" placeholder="*Email" formControlName = "email" required/>
+    <div *ngIf="(Email.invalid && Email.touched) || Email.dirty">
+    	<small *ngIf="Email.errors?.required" class="text-danger">*Email is required</small>
+    	<!--question mark(?) is a safe navigation operator-->
+    	<small *ngIf="Email.errors?.pattern" class="text-danger">*Please provide a valid email address</small>
+  	</div>
+  </div>
+
+
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password" placeholder="*Password" formControlName = "password"  required/>
+
+    <div *ngIf="(Password.invalid && Password.touched) || Password.dirty">
+    	<small *ngIf="Password.errors?.required" class="text-danger">*Password is required</small>
+    	<!--question mark(?) is a safe navigation operator-->
+    	<small *ngIf="Password.errors?.minlength" class="text-danger">*Password must be at least 6 character.</small>
+  	</div>
+  </div>
+
+  <div class="form-group">
+    <label for="confirmpass">Confirm Password</label>
+    <input type="password" class="form-control" id="confirmpass" placeholder="*Confirm Password" formControlName = "confirmpass" required/>
+
+    <div *ngIf="(Confirmpass.invalid && Confirmpass.touched) || Confirmpass.dirty">
+    	<!--question mark(?) is a safe navigation operator-->
+    	<small *ngIf="registerForm.hasError('mismatch')" class="text-danger">*Password do not match.</small>
+  	</div>
+
+    <!-- <span *ngIf="registerForm.hasError('mismatch')">Password do not match.</span> -->
+  </div>
+  <button type="submit" class="btn btn-primary float-right" [disabled]="!registerForm.valid">Register</button>
+
+</form>
+
+</div>
